@@ -9,8 +9,9 @@ namespace QuizGame {
 
         public string QuestionText = "Question text";
 
-        public CategoryEnum Category;
-        public LevelEnum Level;
+        public CategoryEnum Category = CategoryEnum.ENGLISH;
+
+        public LevelEnum Level = LevelEnum.EASY;
 
         public string AnswerA;
 
@@ -23,8 +24,10 @@ namespace QuizGame {
         [TextArea]
         public string trivia;
 
+        [Range(1, 4)]
         public int CorrectAnswerIndex;
 
+        [Range(0, 10)]
         public int points = 10;
 
     }

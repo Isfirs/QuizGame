@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: Q_WhoMadeThis
   m_EditorClassIdentifier: 
   QuestionText: Who made this?
-  category: 1
+  Category: 0
+  Level: 0
   AnswerA: Isfirs
   AnswerB: Bill Gates
   AnswerC: Steve Jobs
   AnswerD: Stephen Hawkin
   trivia: 
-  CorrectAnswerIndex: 0
+  CorrectAnswerIndex: 1
   points: 10
