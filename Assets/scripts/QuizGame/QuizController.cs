@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -29,9 +30,7 @@ namespace QuizGame {
 
         public Text TimerText;
 
-        [Header("Questions")]
-        public List<QuestionSO> questions;
-
+        private List<QuestionSO> questions;
         private QuestionSO ActiveQuestion;
 
         [Range(0, 30)]
@@ -45,6 +44,7 @@ namespace QuizGame {
         /// Called once the object was created.
         /// </summary>
         private void Awake() {
+            Init();
 
             // Store the instance locally
             GameController = GameController.Instance;
@@ -54,8 +54,6 @@ namespace QuizGame {
         /// Called when the object was instantiated and is reaching its first frame.
         /// </summary>
         void Start() {
-            Init();
-
             PickQuestion();
         }
 
@@ -168,10 +166,20 @@ namespace QuizGame {
         /// Object initalizing logic is located here.
         /// </summary>
         void Init() {
-            // Hack in a player
-            GameController.Instance.InitPlayer("Isfirs");
-
             UsernameText.text = GameController.PlayerData.Name;
+
+            questions = new List<QuestionSO>();
+
+            // Load questions from asset folder
+            string[] guids = AssetDatabase.FindAssets("l:question");
+
+            foreach (string guid in guids) {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+
+                QuestionSO q = (QuestionSO) AssetDatabase.LoadAssetAtPath(path, typeof(QuestionSO));
+
+                questions.Add(q);
+            }
         }
 
         /// <summary>
