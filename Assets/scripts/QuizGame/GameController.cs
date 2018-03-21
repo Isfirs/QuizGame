@@ -38,6 +38,10 @@ namespace QuizGame {
             }
 
             private set {
+                if (_PlayerData != null) {
+                    throw new System.Exception("GameController instance already set");
+                }
+
                 _PlayerData = value;
             }
         }

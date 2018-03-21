@@ -5,9 +5,12 @@ namespace QuizGame {
     /// <summary>
     /// This is a template object that can be created via editor functionality.
     /// </summary>
-    public class QuestionSO : ScriptableObject {
+    public class Question : ScriptableObject {
 
-        public string Question = "Question text";
+        public string QuestionText = "Question text";
+
+        public CategoryEnum Category;
+        public LevelEnum Level;
 
         public string AnswerA;
 
@@ -26,6 +29,14 @@ namespace QuizGame {
 
     }
 
-    
+    public enum CategoryEnum {
+
+        ENGLISH, HISTORY, SCIENCE
+
+    }
+
+    public enum LevelEnum {
+        EASY, MEDIUM, HARD
+    }
 
 }

@@ -9,13 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 408b6fdc146984147bda47f418a39123, type: 3}
-  m_Name: QuestionSO
+  m_Name: Q_WhoMadeThis
   m_EditorClassIdentifier: 
-  Question: Question text
-  AnswerA: 
-  AnswerB: 
-  AnswerC: 
-  AnswerD: 
+  QuestionText: Who made this?
+  category: 1
+  AnswerA: Isfirs
+  AnswerB: Bill Gates
+  AnswerC: Steve Jobs
+  AnswerD: Stephen Hawkin
   trivia: 
   CorrectAnswerIndex: 0
   points: 10

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -30,24 +29,19 @@ namespace QuizGame {
 
         public Text TimerText;
 
-        private List<QuestionSO> questions;
-        private QuestionSO ActiveQuestion;
+        private List<Question> questions;
+        private Question ActiveQuestion;
 
         [Range(0, 30)]
         public int QuestionTime = 20;
 
         private float RemainingTime = 0;
 
-        private GameController GameController;
-
         /// <summary>
         /// Called once the object was created.
         /// </summary>
         private void Awake() {
             Init();
-
-            // Store the instance locally
-            GameController = GameController.Instance;
         }
 
         /// <summary>
@@ -86,16 +80,24 @@ namespace QuizGame {
         }
 
         private void PickQuestion() {
-            // Select an integer in the range of available questions
-            int pick = Random.Range(0, questions.Count);
+            if (questions.Count > 0) {
+                // Select an integer in the range of available questions
+                int pick = Random.Range(0, questions.Count);
 
-            // Pick it from the list
-            ActiveQuestion = questions[pick];
+                // Pick it from the list
+                ActiveQuestion = questions[pick];
 
-            // Remove it so it won't get picked again during this game.
-            questions.RemoveAt(pick);
+                // Remove it so it won't get picked again during this game.
+                questions.RemoveAt(pick);
 
-            ShowQuestion();
+                ShowQuestion();
+            } else {
+                ShowNoQuestions();
+            }
+        }
+
+        private void ShowNoQuestions() {
+            this.QuestionText.text = "No Question available";
         }
 
         // Answer button callbacks
@@ -141,7 +143,7 @@ namespace QuizGame {
             GameController.Instance.AddPoints(ActiveQuestion.points);
 
             // Update points
-            PointsText.text = GameController.PlayerData.Points.ToString();
+            PointsText.text = GameController.Instance.PlayerData.Points.ToString();
 
             ShowTrivia();
 
@@ -166,19 +168,17 @@ namespace QuizGame {
         /// Object initalizing logic is located here.
         /// </summary>
         void Init() {
-            UsernameText.text = GameController.PlayerData.Name;
+            UsernameText.text = GameController.Instance.PlayerData.Name;
 
-            questions = new List<QuestionSO>();
+            this.questions = new List<Question>();
 
             // Load questions from asset folder
-            string[] guids = AssetDatabase.FindAssets("l:question");
+            Question[] questions = (Question[]) Resources.LoadAll("Questions", typeof(Question));
 
-            foreach (string guid in guids) {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
+            Debug.Log("Loaded question count: " + questions.Length);
 
-                QuestionSO q = (QuestionSO) AssetDatabase.LoadAssetAtPath(path, typeof(QuestionSO));
-
-                questions.Add(q);
+            foreach (Question q in questions) {
+                this.questions.Add(q);
             }
         }
 
@@ -226,12 +226,8 @@ namespace QuizGame {
         /// Displays the active question
         /// </summary>
         private void ShowQuestion() {
-            QuestionText.text = ActiveQuestion.Question;
+            QuestionText.text = ActiveQuestion.QuestionText;
 
-            ButtonAText.text = ActiveQuestion.AnswerA;
-            ButtonBText.text = ActiveQuestion.AnswerB;
-            ButtonCText.text = ActiveQuestion.AnswerC;
-            ButtonDText.text = ActiveQuestion.AnswerD;
 
             QuestionPanel.gameObject.SetActive(true);
 

@@ -11,7 +11,7 @@ namespace QuizGame.Editor {
 
         [MenuItem("Assets/Create/QuizGame/Question")]
         public static void CreateMyAsset() {
-            QuestionSO asset = ScriptableObject.CreateInstance<QuestionSO>();
+            Question asset = ScriptableObject.CreateInstance<Question>();
 
             AssetDatabase.CreateAsset(asset, "Assets/QuestionSO.asset");
             AssetDatabase.SetLabels(asset, new string[] { "question" });
