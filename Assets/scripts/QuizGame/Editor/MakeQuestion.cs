@@ -23,30 +23,6 @@ namespace QuizGame.Editor {
             Selection.activeObject = asset;
         }
 
-        [MenuItem("Example/FindAssets Example")]
-        static void Test() {
-            Debug.Log("Testing");
-
-            string[] guids = AssetDatabase.FindAssets("l:question");
-
-            foreach (string guid in guids) {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
-
-                Debug.Log(path);
-
-                //
-
-                Debug.Log("Creating instance");
-
-                QuestionSO q = (QuestionSO) AssetDatabase.LoadAssetAtPath(path, typeof(QuestionSO));
-
-                Debug.Log("Logging instance");
-
-                q.Log();
-
-            }
-        }
-
     }
 
 }
