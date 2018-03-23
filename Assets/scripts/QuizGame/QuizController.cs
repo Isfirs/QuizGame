@@ -140,7 +140,24 @@ namespace QuizGame {
             EndGameButton.gameObject.SetActive(false);
 
             // Add points to player
-            GameController.Instance.AddPoints(ActiveQuestion.points);
+
+            // determine points to add
+            int points = 0;
+            switch(ActiveQuestion.Level) {
+                case LevelEnum.EASY: {
+                        points = 1;
+                    }
+                    break;
+                case LevelEnum.MEDIUM: {
+                        points = 10;
+                    }
+                    break;
+                case LevelEnum.HARD: {
+                        points = 100;
+                    }
+                    break;
+            }
+            GameController.Instance.AddPoints(points);
 
             // Update points
             PointsText.text = GameController.Instance.PlayerData.Points.ToString();
@@ -173,7 +190,7 @@ namespace QuizGame {
             this.questions = new List<Question>();
 
             // Load questions from asset folder
-            Question[] questions = (Question[]) Resources.LoadAll("Questions", typeof(Question));
+            Object[] questions = Resources.LoadAll("Questions", typeof(Question));
 
             Debug.Log("Loaded question count: " + questions.Length);
 
@@ -228,6 +245,10 @@ namespace QuizGame {
         private void ShowQuestion() {
             QuestionText.text = ActiveQuestion.QuestionText;
 
+            ButtonAText.text = ActiveQuestion.AnswerA;
+            ButtonBText.text = ActiveQuestion.AnswerB;
+            ButtonCText.text = ActiveQuestion.AnswerC;
+            ButtonDText.text = ActiveQuestion.AnswerD;
 
             QuestionPanel.gameObject.SetActive(true);
 

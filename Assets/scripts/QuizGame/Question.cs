@@ -27,9 +27,6 @@ namespace QuizGame {
         [Range(1, 4)]
         public int CorrectAnswerIndex;
 
-        [Range(0, 10)]
-        public int points = 10;
-
     }
 
     public enum CategoryEnum {
@@ -39,7 +36,11 @@ namespace QuizGame {
     }
 
     public enum LevelEnum {
-        EASY, MEDIUM, HARD
+
+        EASY,
+        MEDIUM,
+        HARD
+
     }
 
 }
