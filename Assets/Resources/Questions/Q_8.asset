@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408b6fdc146984147bda47f418a39123, type: 3}
+  m_Name: Q_8
+  m_EditorClassIdentifier: 
+  QuestionText: What are female elephants called?
+  Category: 2
+  Level: 0
+  AnswerA: Mares
+  AnswerB: Sows
+  AnswerC: Cows
+  AnswerD: Dams
+  trivia: Female elephants are called cows. Males are called bulls. And the babies
+    are called calves
+  CorrectAnswerIndex: 3
